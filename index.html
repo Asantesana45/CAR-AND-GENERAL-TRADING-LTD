@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, minimum-scale=1.0">
+    <title>Car & General - Premium Engineering Solutions</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Welcome Popup -->
+    <div class="modal fade" id="welcomePopup" tabindex="-1" aria-labelledby="welcomePopupLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="welcomePopupLabel">Welcome to Car & General!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Sign up for our newsletter to get exclusive offers and updates!</p>
+                    <form id="welcome-newsletter-form">
+                        <div class="input-group mb-3">
+                            <input type="email" class="form-control" placeholder="Enter your email" id="welcome-newsletter-email" required aria-label="Email for newsletter">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Promotion Banner -->
+    <div class="promotion-banner bg-primary text-white py-2 text-center">
+        <marquee>Special Anniversary Sale - Enjoy Up to 30% Off Selected Products!</marquee>
+    </div>
+
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light shadow-sm">
+        <div class="container">
+            <a class="navbar-brand py-1" href="#" style="max-width: 180px;">
+                <img src="./images/Logo.png" alt="Car & General" class="brand-logo img-fluid">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#products">Products</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#brands">Brands</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                    <li class="nav-item dropdown">
+                        <select id="currency-selector" class="form-select form-select-sm" aria-label="Currency selector">
+                            <option value="KES">KES</option>
+                            <option value="USD">USD</option>
+                            <option value="EUR">EUR</option>
+                        </select>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link" id="theme-toggle" aria-label="Toggle dark mode">
+                            <i class="fas fa-moon" id="theme-icon"></i>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link position-relative" data-bs-toggle="modal" data-bs-target="#cartModal" aria-label="View cart">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle" id="cart-count">0</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link position-relative" data-bs-toggle="modal" data-bs-target="#wishlistModal" aria-label="View wishlist">
+                            <i class="fas fa-heart"></i>
+                            <span class="badge bg-danger position-absolute top-0 start-100 translate-middle" id="wishlist-count">0</span>
+                        </button>
+                    </li>
+                    <li class="nav-item">
+                        <button class="nav-link btn btn-link" data-bs-toggle="modal" data-bs-target="#authModal" aria-label="Login or Signup">
+                            <i class="fas fa-user"></i>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+    <!-- Authentication Modal -->
+    <div class="modal fade" id="authModal" tabindex="-1" aria-labelledby="authModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="authModalLabel">Login / Signup</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <ul class="nav nav-tabs" id="authTabs" role="tablist">
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link active" id="login-tab" data-bs-toggle="tab" data-bs-target="#login" type="button" role="tab" aria-controls="login" aria-selected="true">Login</button>
+                        </li>
+                        <li class="nav-item" role="presentation">
+                            <button class="nav-link" id="signup-tab" data-bs-toggle="tab" data-bs-target="#signup" type="button" role="tab" aria-controls="signup" aria-selected="false">Signup</button>
+                        </li>
+                    </ul>
+                    <div class="tab-content mt-3" id="authTabContent">
+                        <div class="tab-pane fade show active" id="login" role="tabpanel" aria-labelledby="login-tab">
+                            <form id="login-form">
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" id="login-email" placeholder="Email" required aria-label="Email">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" id="login-password" placeholder="Password" required aria-label="Password">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Login</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="signup" role="tabpanel" aria-labelledby="signup-tab">
+                            <form id="signup-form">
+                                <div class="mb-3">
+                                    <input type="text" class="form-control" id="signup-name" placeholder="Full Name" required aria-label="Full Name">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="email" class="form-control" id="signup-email" placeholder="Email" required aria-label="Email">
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" class="form-control" id="signup-password" placeholder="Password" required aria-label="Password">
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Signup</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Cart Modal -->
+    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="cart-items">
+                    <p>Your cart is empty.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Proceed to Checkout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Wishlist Modal -->
+    <div class="modal fade" id="wishlistModal" tabindex="-1" aria-labelledby="wishlistModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="wishlistModalLabel">Your Wishlist</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body" id="wishlist-items">
+                    <p>Your wishlist is empty.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Product Comparison Modal -->
+    <div class="modal fade" id="compareModal" tabindex="-1" aria-labelledby="compareModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="compareModalLabel">Product Comparison</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row" id="compare-items"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Sticky Sidebar -->
+    <div class="sticky-sidebar">
+        <a href="#cartModal" data-bs-toggle="modal" class="sidebar-item" aria-label="View cart"><i class="fas fa-shopping-cart"></i></a>
+        <a href="#wishlistModal" data-bs-toggle="modal" class="sidebar-item" aria-label="View wishlist"><i class="fas fa-heart"></i></a>
+        <a href="#contact" class="sidebar-item" aria-label="Contact us"><i class="fas fa-envelope"></i></a>
+    </div>
+
+
+    <!-- Hero Section -->
+    <section class="hero-section bg-gradient-primary text-white py-5">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h1 class="display-4 mb-4">East Africa's Leading Engineering Solutions Provider</h1>
+                    <p class="lead">Since 1936 - Delivering Quality and Innovation</p>
+                    <a href="#products" class="btn btn-explore">Explore Products</a>
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <div class="hero-image"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Stats Section -->
+    <section class="stats-section py-5">
+        <div class="container">
+            <div class="row text-center g-4">
+                <div class="col-md-3">
+                    <div class="stat-card p-4 shadow animate__animated animate__fadeInUp">
+                        <h3 class="stat-value" data-count="85">0</h3>
+                        <p>Years of Experience</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card p-4 shadow animate__animated animate__fadeInUp">
+                        <h3 class="stat-value" data-count="3000">0</h3>
+                        <p>Employees</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card p-4 shadow animate__animated animate__fadeInUp">
+                        <h3 class="stat-value" data-count="10">0</h3>
+                        <p>Countries</p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="stat-card p-4 shadow animate__animated animate__fadeInUp">
+                        <h3 class="stat-value" data-count="50">0</h3>
+                        <span class="stat-unit">Million+</span>
+                        <p>Satisfied Customers</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Products Section -->
+    <section id="products" class="products-section py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Featured Products</h2>
+            <div class="product-controls mb-4 d-flex justify-content-center gap-3 flex-wrap">
+                <input type="text" id="search-bar" class="form-control w-50" placeholder="Search products..." aria-label="Search products">
+                <select id="category-filter" class="form-select w-25" aria-label="Filter by category">
+                    <option value="all">All Categories</option>
+                    <option value="lawnmower">Lawnmowers</option>
+                    <option value="generator">Generators</option>
+                    <option value="tractor">Tractors</option>
+                </select>
+                <select id="sort-filter" class="form-select w-25" aria-label="Sort products">
+                    <option value="default">Sort By: Default</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                </select>
+            </div>
+            <div class="row g-4" id="product-grid">
+                <div class="col-lg-4 col-md-6 product-item" data-category="lawnmower" data-price="446000">
+                    <div class="product-card shadow animate__animated animate__fadeIn">
+                        <img src="./images/lawnmower2.jpeg" class="product-image lazy-load" alt="20' Petrol Lawnmower" loading="lazy">
+                        <div class="product-details">
+                            <h3>20" Petrol Lawnmower</h3>
+                            <p class="price" data-base-price="446000">KES 446,000</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-name="20' Petrol Lawnmower" data-price="446000">Add to Cart</button>
+                                <button class="btn btn-outline-primary add-to-wishlist" data-name="20' Petrol Lawnmower" data-price="446000">Wishlist</button>
+                                <button class="btn btn-outline-primary add-to-compare" data-name="20' Petrol Lawnmower" data-price="446000" data-description="A powerful petrol lawnmower perfect for large gardens." data-image="./images/lawnmower2.jpeg">Compare</button>
+                                <button class="btn btn-outline-primary quick-view" data-bs-toggle="modal" data-bs-target="#quickViewModal" data-name="20' Petrol Lawnmower" data-price="446000" data-image="./images/lawnmower2.jpeg" data-description="A powerful petrol lawnmower perfect for large gardens." data-gallery='["./images/lawnmower2.jpeg", "./images/Lawnmower-alt1.jpeg", "./images/Lawnmower-alt2.jpeg"]'>Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 product-item" data-category="generator" data-price="189000">
+                    <div class="product-card shadow animate__animated animate__fadeIn">
+                        <img src="./images/generator.jpeg" class="product-image lazy-load" alt="5KVA Diesel Generator" loading="lazy">
+                        <div class="product-details">
+                            <h3>5KVA Diesel Generator</h3>
+                            <p class="price" data-base-price="189000">KES 189,000</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-name="5KVA Diesel Generator" data-price="189000">Add to Cart</button>
+                                <button class="btn btn-outline-primary add-to-wishlist" data-name="5KVA Diesel Generator" data-price="189000">Wishlist</button>
+                                <button class="btn btn-outline-primary add-to-compare" data-name="5KVA Diesel Generator" data-price="189000" data-description="Reliable diesel generator for backup power needs." data-image="./images/generator.jpeg">Compare</button>
+                                <button class="btn btn-outline-primary quick-view" data-bs-toggle="modal" data-bs-target="#quickViewModal" data-name="5KVA Diesel Generator" data-price="189000" data-image="./images/generator.jpeg" data-description="Reliable diesel generator for backup power needs." data-gallery='["./images/generator.jpeg", "./images/generator-alt1.jpeg", "./images/generator-alt2.jpeg"]'>Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6 product-item" data-category="tractor" data-price="2450000">
+                    <div class="product-card shadow animate__animated animate__fadeIn">
+                        <img src="./images/tractor.jpeg" class="product-image lazy-load" alt="Farm Tractor 4WD" loading="lazy">
+                        <div class="product-details">
+                            <h3>Farm Tractor 4WD</h3>
+                            <p class="price" data-base-price="2450000">KES 2,450,000</p>
+                            <div class="product-actions">
+                                <button class="btn btn-primary add-to-cart" data-name="Farm Tractor 4WD" data-price="2450000">Add to Cart</button>
+                                <button class="btn btn-outline-primary add-to-wishlist" data-name="Farm Tractor 4WD" data-price="2450000">Wishlist</button>
+                                <button class="btn btn-outline-primary add-to-compare" data-name="Farm Tractor 4WD" data-price="2450000" data-description="A robust 4WD tractor for agricultural tasks." data-image="./images/tractor.jpeg">Compare</button>
+                                <button class="btn btn-outline-primary quick-view" data-bs-toggle="modal" data-bs-target="#quickViewModal" data-name="Farm Tractor 4WD" data-price="2450000" data-image="./images/tractor.jpeg" data-description="A robust 4WD tractor for agricultural tasks." data-gallery='["./images/tractor.jpeg", "./images/tractor-alt1.jpeg", "./images/tractor-alt2.jpeg"]'>Quick View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Quick View Modal with Gallery -->
+    <div class="modal fade" id="quickViewModal" tabindex="-1" aria-labelledby="quickViewModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="quickViewModalLabel">Product Details</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="product-gallery">
+                                <img id="quick-view-image" src="" class="img-fluid zoom-image" alt="Product Image">
+                                <div class="gallery-thumbnails mt-3 d-flex gap-2">
+                                    <!-- Thumbnails will be dynamically added -->
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <h3 id="quick-view-name"></h3>
+                            <p id="quick-view-price" class="price"></p>
+                            <p id="quick-view-description"></p>
+                            <button class="btn btn-primary add-to-cart" id="quick-view-add-to-cart">Add to Cart</button>
+                            <button class="btn btn-outline-primary add-to-wishlist" id="quick-view-add-to-wishlist">Wishlist</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Customer Reviews Section -->
+    <section id="reviews" class="reviews-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Customer Reviews</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="review-card shadow p-4 text-center animate__animated animate__fadeIn">
+                        <p>"Excellent products and great customer service!"</p>
+                        <h5>John Mwangi</h5>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="review-card shadow p-4 text-center animate__animated animate__fadeIn">
+                        <p>"The tractor we bought has been a game-changer for our farm."</p>
+                        <h5>Esther Njoroge</h5>
+                        <div class="stars">★★★★☆</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="review-card shadow p-4 text-center animate__animated animate__fadeIn">
+                        <p>"Fast delivery and reliable equipment!"</p>
+                        <h5>Peter Kamau</h5>
+                        <div class="stars">★★★★★</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Brands Section -->
+    <section id="brands" class="brands-section py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Our Trusted Brands</h2>
+            <div class="row g-4 justify-content-center align-items-center">
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="brand-logo-card animate__animated animate__fadeIn">
+                        <img src="./images/mercur-logo.png" alt="Mercur" class="img-fluid lazy-load" loading="lazy">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="brand-logo-card animate__animated animate__fadeIn">
+                        <img src="./images/garmin-logo.png" alt="Garmin" class="img-fluid lazy-load" loading="lazy">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="brand-logo-card animate__animated animate__fadeIn">
+                        <img src="./images/honda-logo.jpeg" alt="Honda" class="img-fluid lazy-load" loading="lazy">
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-3 col-4">
+                    <div class="brand-logo-card animate__animated animate__fadeIn">
+                        <img src="./images/bosch-logo.png" alt="Bosch" class="img-fluid lazy-load" loading="lazy">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Services Section -->
+    <section class="services-section py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Why Choose Us?</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="service-card text-center p-4 shadow animate__animated animate__fadeIn">
+                        <i class="fas fa-award service-icon mb-3"></i>
+                        <h4>Premium Quality</h4>
+                        <p>International standard products with certified quality assurance</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card text-center p-4 shadow animate__animated animate__fadeIn">
+                        <i class="fas fa-tools service-icon mb-3"></i>
+                        <h4>Expert Service</h4>
+                        <p>Certified technicians and professional support team</p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="service-card text-center p-4 shadow animate__animated animate__fadeIn">
+                        <i class="fas fa-shield-alt service-icon mb-3"></i>
+                        <h4>Warranty Protection</h4>
+                        <p>Comprehensive warranty on all products and services</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About Section -->
+    <section id="about" class="about-section py-5 bg-light">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <img src="./images/about-us.jpg" alt="Our History" class="img-fluid rounded lazy-load" loading="lazy">
+                </div>
+                <div class="col-lg-6 animate__animated animate__fadeInRight">
+                    <h2 class="section-title">Our Legacy</h2>
+                    <p class="lead">From humble beginnings in 1936 in Nakuru, Car & General has grown to become East Africa's premier engineering solutions provider.</p>
+                    <div class="timeline mt-4">
+                        <div class="timeline-item">
+                            <h5>1936</h5>
+                            <p>Founded as a small automotive workshop</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>1960</h5>
+                            <p>Expanded to agricultural machinery distribution</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>2005</h5>
+                            <p>Awarded ISO 9001 certification</p>
+                        </div>
+                        <div class="timeline-item">
+                            <h5>2025</h5>
+                            <p>Regional expansion to more than 10 countries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact-section py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-6 animate__animated animate__fadeInLeft">
+                    <h2 class="section-title mb-4">Get In Touch</h2>
+                    <form class="contact-form">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <input type="text" class="form-control" placeholder="Your Name" required aria-label="Your Name">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="email" class="form-control" placeholder="Your Email" required aria-label="Your Email">
+                            </div>
+                            <div class="col-12">
+                                <input type="tel" class="form-control" placeholder="Phone Number" required aria-label="Phone Number">
+                            </div>
+                            <div class="col-12">
+                                <textarea class="form-control" rows="5" placeholder="Your Message" required aria-label="Your Message"></textarea>
+                            </div>
+                            <div class="col-12">
+                                <button class="btn btn-primary w-100">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="col-lg-6 mt-4 mt-lg-0 animate__animated animate__fadeInRight">
+                    <div class="map-container ratio ratio-16x9">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63820.43067215801!2d36.75506944999999!3d-1.3036204!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x182f1b1eec1e5f25%3A0x40e1c57071ac2084!2sCar%20and%20General!5e0!3m2!1sen!2ske!4v1717099999999!5m2!1sen!2ske" 
+                        style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Car & General Location"></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- News Section -->
+    <section class="news-section py-5 bg-white">
+        <div class="container">
+            <h2 class="section-title text-center mb-5 animate__animated animate__fadeIn">Latest News</h2>
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="news-card shadow animate__animated animate__fadeIn">
+                        <img src="./images/news.png" class="news-image lazy-load" alt="News 1" loading="lazy">
+                        <div class="news-content p-3">
+                            <h5>New Partnership Announcement</h5>
+                            <p class="text-muted small">15 May 2025</p>
+                            <p>We're proud to announce our new partnership with leading engine manufacturers</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="news-card shadow animate__animated animate__fadeIn">
+                        <img src="./images/news.png" class="news-image lazy-load" alt="News 2" loading="lazy">
+                        <div class="news-content p-3">
+                            <h5>New Branch Opening</h5>
+                            <p class="text-muted small">1 May 2025</p>
+                            <p>Expanding our reach with a new branch in Kigali, Rwanda</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="news-card shadow animate__animated animate__fadeIn">
+                        <img src="./images/news.png" class="news-image lazy-load" alt="News 3" loading="lazy">
+                        <div class="news-content p-3">
+                            <h5>Innovation Award 2025</h5>
+                            <p class="text-muted small">20 April 2025</p>
+                            <p>Recipient of East Africa's Best Engineering Solutions Provider award</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Footer -->
+    <footer class="footer bg-dark text-white py-5">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-lg-3">
+                    <h5>Quick Links</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#products" class="text-white text-decoration-none">Products</a></li>
+                        <li><a href="#brands" class="text-white text-decoration-none">Brands</a></li>
+                        <li><a href="#about" class="text-white text-decoration-none">About Us</a></li>
+                        <li><a href="#contact" class="text-white text-decoration-none">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Support</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-white text-decoration-none">Warranty</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">Documentation</a></li>
+                        <li><a href="#" class="text-white text-decoration-none">FAQs</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Connect With Us</h5>
+                    <div class="social-links">
+                        <a href="#" class="text-white me-3" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+                        <a href="#" class="text-white me-3" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="text-white me-3" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                        <a href="#" class="text-white" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <h5>Newsletter</h5>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <div class="input-group">
+                            <input type="email" class="form-control" placeholder="Enter your email" id="newsletter-email" required aria-label="Email for newsletter">
+                            <button class="btn btn-primary" type="submit">Subscribe</button>
+                        </div>
+                        <div class="text-success mt-2" id="newsletter-message"></div>
+                    </form>
+                </div>
+            </div>
+            <hr class="my-5">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="payment-methods">
+                        <img src="./images/visa.jpeg" alt="Visa" class="me-2 lazy-load" loading="lazy">
+                        <img src="./images/MasterCard_Logo.svg.png" alt="Mastercard" class="me-2 lazy-load" loading="lazy">
+                        <img src="./images/M-pesa-logo.png" alt="M-Pesa" class="lazy-load" loading="lazy">
+                    </div>
+                </div>
+                <div class="col-md-6 text-end">
+                    <p class="mb-0">© 2025 Car & General. All rights reserved</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+
+    <!-- Chat Button and Chat Window -->
+    <div class="chat-button">
+        <button class="btn btn-success rounded-circle p-3" id="chat-toggle" aria-label="Open chat">
+            <i class="fas fa-comments"></i>
+        </button>
+    </div>
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <h5>Live Chat</h5>
+            <button class="btn-close" id="chat-close" aria-label="Close chat"></button>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <p>Welcome! How can we assist you today?</p>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" placeholder="Type your message..." aria-label="Chat message">
+            <button class="btn btn-primary" id="chat-send">Send</button>
+        </div>
+    </div>
+
+
+    <!-- Back to Top Button -->
+    <button class="back-to-top btn btn-primary rounded-circle" id="back-to-top" aria-label="Back to top">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
